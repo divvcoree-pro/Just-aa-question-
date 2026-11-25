@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Gulgula</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    background: #081b1c;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* BACKGROUND */
+
+.background {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 45%,
+        #174b42 0%,
+        #0c2929 45%,
+        #071416 100%);
+    z-index: -3;
+}
+
+.glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    background: #b99a56;
+    filter: blur(150px);
+    opacity: .15;
+    top: 20%;
+    left: 35%;
+    z-index: -2;
+}
+
+.star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #e8d4a6;
+    box-shadow: 0 0 10px #e8d4a6;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; }
+    to { opacity: 1; }
+}
+
+/* MAIN LAYOUT */
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* PROPOSAL CARD */
+
+.card {
+    width: min(100%, 470px);
+    min-height: 440px;
+    padding: 48px 28px;
+    border-radius: 22px;
+
+    text-align: center;
+
+    background: rgba(13, 39, 37, .94);
+
+    border: 1px solid rgba(206, 177, 116, .55);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.45),
+        inset 0 0 30px rgba(255,255,255,.02);
+
+    position: relative;
+}
+
+/* CARD DETAILS */
+
+.top-line {
+    width: 65px;
+    height: 2px;
+    background: #c9a96e;
+    margin: 0 auto 27px;
+}
+
+.small-title {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 5px;
+    font-size: 13px;
+    color: #c9b58a;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    color: #e0c48b;
+    font-size: clamp(48px, 10vw, 68px);
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 24px 0;
+    text-shadow: 0 0 25px rgba(224,196,139,.2);
+}
+
+.description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    color: #d4dfd8;
+    line-height: 1.7;
+}
+
+.divider {
+    color: #c9a96e;
+    margin: 23px auto;
+    letter-spacing: 4px;
+}
+
+/* BUTTON BOX */
+
+.button-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    min-height: 60px;
+    margin-top: 20px;
+}
+
+button {
+    width: 120px;
+    height: 46px;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+/* YES */
+
+#yes {
+    background: linear-gradient(135deg,#d3b477,#a98545);
+    color: #102523;
+    border: 1px solid #e3c995;
+    transition: .3s;
+}
+
+#yes:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px #c9a96e66;
+}
+
+/* NO */
+
+#no {
+    position: relative;
+    background: transparent;
+    border: 1px solid #a8b9ad;
+    color: #e2e8e2;
+    transition: left .18s ease, top .18s ease;
+    z-index: 10;
+}
+
+.footer {
+    font-size: 10px;
+    color: #9aafa4;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+/* CELEBRATION SCREEN */
+
+#celebration {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+
+    background:
+        radial-gradient(circle at center,
+        #175348,
+        #092522 65%,
+        #061313);
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+    overflow: hidden;
+}
+
+.celebration-content {
+    position: relative;
+    z-index: 30;
+    padding: 25px;
+    animation: appear 1.2s ease;
+}
+
+.celebration-content h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(55px, 12vw, 90px);
+    color: #e5c58b;
+    font-weight: 400;
+    text-shadow: 0 0 30px rgba(229,197,139,.35);
+}
+
+.celebration-content p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px,5vw,26px);
+    color: #e4e9df;
+    margin-top: 20px;
+    line-height: 1.7;
+}
+
+.celebration-line {
+    width: 80px;
+    height: 1px;
+    background: #d5b77c;
+    margin: 25px auto;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* HEART ANIMATION */
+
+.heart {
+    position: fixed;
+    width: 18px;
+    height: 18px;
+    background: #e76c96;
+    transform: rotate(45deg);
+    pointer-events: none;
+    z-index: 25;
+    animation: heartBurst 3s ease-out forwards;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -9px;
+}
+
+.heart::after {
+    left: -9px;
+}
+
+@keyframes heartBurst {
+    0% {
+        opacity: 1;
+        transform: translate(0,0) rotate(45deg) scale(.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(var(--x),var(--y))
+            rotate(405deg)
+            scale(1.8);
+    }
+}
+
+/* FIREWORKS */
+
+.spark {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 24;
+    box-shadow: 0 0 12px currentColor;
+    animation: explode 1.6s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        transform: translate(0,0) scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--x),var(--y)) scale(0);
+    }
+}
+
+/* GOLDEN CONFETTI */
+
+.confetti {
+    position: fixed;
+    width: 7px;
+    height: 14px;
+    z-index: 23;
+    pointer-events: none;
+    animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-30px) rotate(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(900deg);
+        opacity: 0;
+    }
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media(max-width: 480px) {
+
+    .card {
+        width: 100%;
+        min-height: 420px;
+        padding: 43px 19px;
+    }
+
+    h1 {
+        font-size: 53px;
+    }
+
+    .description {
+        font-size: 19px;
+    }
+
+    .button-area {
+        gap: 14px;
+    }
+
+    button {
+        width: 115px;
+    }
+
+}
+
+@media(max-height: 600px) {
+    .card {
+        min-height: auto;
+        padding: 25px 20px;
+    }
+
+    h1 {
+        margin: 12px 0;
+        font-size: 48px;
+    }
+
+    .divider {
+        margin: 12px auto;
+    }
+
+    .footer {
+        margin-top: 15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="glow"></div>
+
+<!-- STARS -->
+
+<script>
+for(let i = 0; i < 45; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+
+<!-- MAIN PROPOSAL -->
+
+<div class="wrapper" id="main">
+
+    <div class="card">
+
+        <div class="top-line"></div>
+
+        <div class="small-title">
+            A Little Question For You
+        </div>
+
+        <h1>
+            Are You My<br>Gulgula?
+        </h1>
+
+        <p class="description">
+            In the whole world,
+            <br>
+            you are my favourite human.
+        </p>
+
+        <div class="divider">— ♥ —</div>
+
+        <div class="button-area">
+
+            <button id="yes" type="button">
+                YES
+            </button>
+
+            <button id="no" type="button">
+                NO
+            </button>
+
+        </div>
+
+        <div class="footer">
+            CHOOSE YOUR ANSWER WISELY
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CELEBRATION -->
+
+<div id="celebration">
+
+    <div class="celebration-content">
+
+        <h2>It's a YES!</h2>
+
+        <div class="celebration-line"></div>
+
+        <p>
+            Mujhe to pata tha.
+            <br><br>
+            I Love youuu Beryy musss.
+            <br>
+            My Gulgula.
+        </p>
+
+        <div class="celebration-line"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// BUTTON ELEMENTS
+
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+
+// NO BUTTON RUNS AWAY
+
+function moveNo() {
+
+    const padding = 20;
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const x = padding + Math.random() * Math.max(0, maxX - padding);
+    const y = padding + Math.random() * Math.max(0, maxY - padding);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+
+noBtn.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    moveNo();
+}, {passive: false});
+
+noBtn.addEventListener("click", moveNo);
+
+
+// YES CELEBRATION
+
+yesBtn.addEventListener("click", sayYes);
+
+function sayYes() {
+
+    document.getElementById("main").style.display = "none";
+
+    document.getElementById("celebration").style.display = "flex";
+
+    // Initial massive heart explosion
+
+    for(let i = 0; i < 120; i++) {
+        setTimeout(createHeart, i * 20);
+    }
+
+    // Initial fireworks
+
+    for(let i = 0; i < 25; i++) {
+        setTimeout(createFirework, i * 150);
+    }
+
+    // Initial confetti
+
+    for(let i = 0; i < 150; i++) {
+        setTimeout(createConfetti, i * 30);
+    }
+
+    // Continuous celebration
+
+    const heartTimer = setInterval(createHeart, 100);
+
+    const fireworkTimer = setInterval(createFirework, 400);
+
+    const confettiTimer = setInterval(createConfetti, 100);
+
+    // Stop after 15 seconds
+
+    setTimeout(() => {
+        clearInterval(heartTimer);
+        clearInterval(fireworkTimer);
+        clearInterval(confettiTimer);
+    }, 15000);
+}
+
+
+// HEART EXPLOSION
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+
+    heart.style.top = Math.random() * window.innerHeight + "px";
+
+    const colors = [
+        "#ff5c91",
+        "#eaa0b9",
+        "#b94c75",
+        "#f5c4d4",
+        "#ffffff",
+        "#d4af70"
+    ];
+
+    heart.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    heart.style.setProperty(
+        "--x",
+        (Math.random() - .5) * 500 + "px"
+    );
+
+    heart.style.setProperty(
+        "--y",
+        (Math.random() - .5) * 600 + "px"
+    );
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3000);
+}
+
+
+// FIREWORK EXPLOSIONS
+
+function createFirework() {
+
+    const centerX = Math.random() * window.innerWidth;
+
+    const centerY = Math.random() * window.innerHeight * .75;
+
+    const colors = [
+        "#ffd700",
+        "#ff5c91",
+        "#ffffff",
+        "#e9a2bb",
+        "#c58aff",
+        "#8ee6c5"
+    ];
+
+    for(let i = 0; i < 40; i++) {
+
+        const spark = document.createElement("div");
+
+        spark.className = "spark";
+
+        spark.style.left = centerX + "px";
+
+        spark.style.top = centerY + "px";
+
+        spark.style.color =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        spark.style.background = spark.style.color;
+
+        const angle = (Math.PI * 2 * i) / 40;
+
+        const distance = 60 + Math.random() * 150;
+
+        spark.style.setProperty(
+            "--x",
+            Math.cos(angle) * distance + "px"
+        );
+
+        spark.style.setProperty(
+            "--y",
+            Math.sin(angle) * distance + "px"
+        );
+
+        document.body.appendChild(spark);
+
+        setTimeout(() => spark.remove(), 1700);
+    }
+}
+
+
+// GOLDEN CONFETTI
+
+function createConfetti() {
+
+    const confetti = document.createElement("div");
+
+    confetti.className = "confetti";
+
+    confetti.style.left = Math.random() * 100 + "vw";
+
+    confetti.style.top = "-20px";
+
+    const colors = [
+        "#d4af37",
+        "#f5c5d5",
+        "#e76b94",
+        "#ffffff",
+        "#c58aff",
+        "#9de0c1"
+    ];
+
+    confetti.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    confetti.style.animationDuration =
+        (2 + Math.random() * 3) + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 5000);
+}
+
+</script>
+
+</body>
+</html>
